@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:states_app/bloc/user/user_cubit.dart';
+import 'package:states_app/models/user.dart';
+
 class Page2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final userCubit = context.bloc<UserCubit>();
     return Scaffold(
       appBar: AppBar(title: Text('Page 1')),
       body: Center(
@@ -15,7 +21,13 @@ class Page2 extends StatelessWidget {
                 style: TextStyle(color: Colors.white),
               ),
               color: Colors.blue,
-              onPressed: () {},
+              onPressed: () {
+                var user = User(
+                    name: 'Miguel Sanchez',
+                    age: 23,
+                    jobs: ['Flutter developer']);
+                userCubit.setUser(user);
+              },
             ),
             MaterialButton(
               child: Text(
@@ -23,7 +35,9 @@ class Page2 extends StatelessWidget {
                 style: TextStyle(color: Colors.white),
               ),
               color: Colors.blue,
-              onPressed: () {},
+              onPressed: () {
+                userCubit.setAge(25);
+              },
             ),
             MaterialButton(
               child: Text(
@@ -31,7 +45,9 @@ class Page2 extends StatelessWidget {
                 style: TextStyle(color: Colors.white),
               ),
               color: Colors.blue,
-              onPressed: () {},
+              onPressed: () {
+                userCubit.addJob();
+              },
             ),
           ],
         ),
